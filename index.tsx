@@ -17,6 +17,7 @@ const App: React.FC = () => {
     const [isProcessingOcr, setIsProcessingOcr] = useState<boolean>(false);
     const [ocrResultText, setOcrResultText] = useState<string | null>(null);
     const [firstPagePreviewUrl, setFirstPagePreviewUrl] = useState<string | null>(null);
+    const [showPreviewModal, setShowPreviewModal] = useState<boolean>(false);
 
     const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
     const [currentMessage, setCurrentMessage] = useState<string>('');
@@ -84,7 +85,13 @@ const App: React.FC = () => {
         try {
             const result = await simulateOcrProcessing(pdfFile, ocrEffort);
             setOcrResultText(result.ocrText);
-            setFirstPagePreviewUrl(result.previewUrl || null);
+
+            if (result.previewUrl) {
+                setFirstPagePreviewUrl(result.previewUrl);
+                setShowPreviewModal(true);
+            } else {
+                setFirstPagePreviewUrl(null);
+            }
             
             setChatMessages([{ 
                 id: Date.now().toString(), 
@@ -164,6 +171,7 @@ const App: React.FC = () => {
         setIsProcessingOcr(false);
         setOcrResultText(null);
         setFirstPagePreviewUrl(null);
+        setShowPreviewModal(false); // Also reset modal visibility
         setChatMessages([]);
         setCurrentMessage('');
         setSelectedChatModel('plain');
@@ -174,33 +182,22 @@ const App: React.FC = () => {
 
     return (
         <div className="app-shell">
-            <aside className="sidebar">
-                <div className="sidebar-header">DocuChat AI</div>
-                <button onClick={startNewDocument} className="new-doc-btn">
-                    <i className="fas fa-plus"></i> New Document
-                </button>
-                
-                {pdfFile && (currentView === 'ocrConfig' || currentView === 'chat') && (
-                    <div className="sidebar-document-info">
-                        <h3>{pdfFile.name}</h3>
-                        {currentView === 'chat' && firstPagePreviewUrl && (
-                             <img 
-                                src={firstPagePreviewUrl} 
-                                alt={`Preview of ${pdfFile.name}`} 
-                                className="sidebar-document-preview"
-                             />
-                        )}
-                        {currentView === 'ocrConfig' && (
-                             <p>OCR Setting: {getOcrEffortLabel(ocrEffort)}</p>
-                        )}
-                         {currentView === 'chat' && ocrResultText && (
-                             <p style={{fontSize: '0.8rem', marginTop:'10px', maxHeight: '100px', overflowY:'auto'}}>Context: {ocrResultText.substring(0,200)}...</p>
-                        )}
-                    </div>
-                )}
-            </aside>
-
+            {/* Sidebar removed */}
             <main className="main-content">
+                <div className="main-header-controls">
+                    {/* Relocated New Document Button */}
+                    <button onClick={startNewDocument} className="new-doc-btn global-new-doc-btn">
+                        <i className="fas fa-plus"></i> New Document
+                    </button>
+                    {/* You can add a document title here if needed, e.g., when pdfFile is available */}
+                    {pdfFile && (currentView === 'ocrConfig' || currentView === 'chat') && (
+                        <span className="document-title-header">
+                            {pdfFile.name}
+                            {currentView === 'ocrConfig' && ` - ${getOcrEffortLabel(ocrEffort)}`}
+                        </span>
+                    )}
+                </div>
+
                 {error && <div className="error-message-bar" role="alert">{error}</div>}
 
                 {currentView === 'upload' && (
@@ -219,10 +216,11 @@ const App: React.FC = () => {
                 {currentView === 'ocrConfig' && pdfFile && (
                     <div className="ocr-config-view" aria-labelledby="ocr-title">
                         <h2 id="ocr-title">Configure Document Processing</h2>
-                        <p className="document-name">File: <strong>{pdfFile.name}</strong></p>
+                        {/* Replaced <p className="document-name"> with info in main-header-controls for file name */}
+                        {/* <p className="document-name">File: <strong>{pdfFile.name}</strong></p> */}
                         <div className="slider-container">
                             <label htmlFor="ocr-effort-slider" className="ocr-effort-label">
-                                OCR Effort: {getOcrEffortLabel(ocrEffort)} 
+                                OCR Effort: {getOcrEffortLabel(ocrEffort)}
                                 <span style={{display: 'block', fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight:'normal'}}>{getOcrEffortDescription(ocrEffort)}</span>
                             </label>
                             <input
@@ -254,31 +252,17 @@ const App: React.FC = () => {
 
                 {currentView === 'chat' && pdfFile && (
                     <div className="chat-view" aria-labelledby="chat-title-main">
+                        {/* Document name is now in .main-header-controls */}
                         {/* <h2 id="chat-title-main" className="chat-header">Chat with: {pdfFile.name}</h2> */}
                         
-                        <div className="model-selection-chat" role="radiogroup" aria-labelledby="model-select-label">
-                            <span id="model-select-label">Model:</span>
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="chatModel"
-                                    value="plain"
-                                    checked={selectedChatModel === 'plain'}
-                                    onChange={() => setSelectedChatModel('plain')}
-                                />
-                                 <span>Plain</span>
-                            </label>
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="chatModel"
-                                    value="thinking"
-                                    checked={selectedChatModel === 'thinking'}
-                                    onChange={() => setSelectedChatModel('thinking')}
-                                />
-                                <span><i className="fas fa-brain" style={{marginRight: '4px'}}></i>Thinking</span>
-                            </label>
-                        </div>
+                        {/* Display simplified OCR context if available and not too long, or make it toggleable */}
+                        {ocrResultText && (
+                             <div className="ocr-context-preview-chat">
+                                <strong>Document Context (Summary):</strong> {ocrResultText.substring(0,150)}...
+                             </div>
+                        )}
+
+                        {/* Old model selection chat removed from here */}
 
                         <div className="chat-area" ref={chatAreaRef} aria-live="polite" aria-atomic="false">
                             {chatMessages.map((msg) => (
@@ -317,19 +301,48 @@ const App: React.FC = () => {
                         </div>
 
                         <div className="chat-input-area">
-                            <input
-                                type="text"
-                                className="chat-input-field"
-                                value={currentMessage}
-                                onChange={(e) => setCurrentMessage(e.target.value)}
-                                onKeyPress={(e) => e.key === 'Enter' && !isAiTyping && handleSendMessage()}
-                                placeholder="Ask something about your document..."
-                                aria-label="Type your message"
-                                disabled={isAiTyping}
-                            />
-                            <button onClick={handleSendMessage} className="send-btn" disabled={isAiTyping || !currentMessage.trim()} aria-label="Send message">
-                                {isAiTyping ? <span className="spinner"></span> : <i className="fas fa-paper-plane"></i>}
+                            <div className="model-bubble-buttons" role="radiogroup" aria-label="Select AI Model">
+                                <button
+                                    onClick={() => setSelectedChatModel('plain')}
+                                    className={`model-bubble-btn ${selectedChatModel === 'plain' ? 'active' : ''}`}
+                                    aria-pressed={selectedChatModel === 'plain'}
+                                >
+                                    Plain
+                                </button>
+                                <button
+                                    onClick={() => setSelectedChatModel('thinking')}
+                                    className={`model-bubble-btn ${selectedChatModel === 'thinking' ? 'active' : ''}`}
+                                    aria-pressed={selectedChatModel === 'thinking'}
+                                >
+                                    <i className="fas fa-brain"></i> Thinking
+                                </button>
+                            </div>
+                            <div className="chat-input-controls"> {/* New wrapper for input and send button */}
+                                <input
+                                    type="text"
+                                    className="chat-input-field"
+                                    value={currentMessage}
+                                    onChange={(e) => setCurrentMessage(e.target.value)}
+                                    onKeyPress={(e) => e.key === 'Enter' && !isAiTyping && handleSendMessage()}
+                                    placeholder="Ask something about your document..."
+                                    aria-label="Type your message"
+                                    disabled={isAiTyping}
+                                />
+                                <button onClick={handleSendMessage} className="send-btn" disabled={isAiTyping || !currentMessage.trim()} aria-label="Send message">
+                                    {isAiTyping ? <span className="spinner"></span> : <i className="fas fa-paper-plane"></i>}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {showPreviewModal && firstPagePreviewUrl && (
+                    <div className="preview-modal-overlay" onClick={() => setShowPreviewModal(false)}>
+                        <div className="preview-modal-content" onClick={(e) => e.stopPropagation()}>
+                            <button className="preview-modal-close-btn" onClick={() => setShowPreviewModal(false)} aria-label="Close preview">
+                                <i className="fas fa-times"></i>
                             </button>
+                            <img src={firstPagePreviewUrl} alt="Document Preview" />
                         </div>
                     </div>
                 )}
