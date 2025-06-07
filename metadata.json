@@ -1,0 +1,6 @@
+
+{
+  "name": "AI Document Assistant",
+  "description": "An application to upload PDF documents, process them with OCR, and chat with an AI about their content using a modern interface.",
+  "requestFramePermissions": []
+}
