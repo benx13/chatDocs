@@ -12,9 +12,13 @@
     --shadow-sm: 0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
     --shadow-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    --ai-message-bg: #e9e9eb;
-    --ai-thinking-bg: #e6f4ea; /* Light green for thinking AI */
-    --ai-thinking-text: #137333;
+    --user-message-bg: var(--primary-accent); /* User messages use primary accent */
+    --ai-message-bg: #f0f0f0; /* Slightly lighter grey for AI messages */
+    /* --ai-thinking-bg: #e6f4ea; /* Retaining for reference, but not used for bubble background now */
+    /* --ai-thinking-text: #137333; /* Retaining for reference */
+    --border-radius-sm: 6px; /* Slightly smaller base for some elements if needed */
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
 }
 
 * {
@@ -41,62 +45,66 @@ body {
 }
 
 .sidebar {
-    width: 280px;
+    width: 280px; /* Or 300px if more space is desired */
     background-color: var(--sidebar-bg);
-    padding: 20px;
+    padding: 20px; /* Existing padding, seems okay */
     border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 20px; /* Spacing between elements in sidebar */
     overflow-y: auto;
 }
 
 .sidebar-header {
-    font-size: 1.25rem;
+    font-size: 1.2rem; /* Slightly adjusted */
     font-weight: 600;
     color: var(--text-primary);
-    padding-bottom: 10px;
+    padding-bottom: 15px; /* Increased padding */
     border-bottom: 1px solid var(--border-color);
 }
 
 .new-doc-btn {
     background-color: var(--primary-accent);
     color: white;
-    padding: 10px 15px;
+    padding: 12px 18px; /* Slightly more padding */
     border: none;
-    border-radius: 20px; /* Pill shape */
+    border-radius: var(--border-radius-md); /* Consistent rounding */
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.95rem; /* Slightly larger font */
     font-weight: 500;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px; /* Increased gap for icon */
     width: 100%;
     box-shadow: var(--shadow-sm);
+}
+.new-doc-btn i { /* Ensure icon has a slight margin if needed */
+    /* margin-right: 4px; /* Handled by gap now */
 }
 
 .new-doc-btn:hover {
     background-color: var(--primary-accent-hover);
+    box-shadow: var(--shadow-md);
 }
 
 .sidebar-document-info {
-    margin-top: 10px;
+    margin-top: 10px; /* Spacing from button or header */
 }
 
 .sidebar-document-info h3 {
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 600; /* Good */
     color: var(--text-primary);
-    margin-bottom: 8px;
+    margin-bottom: 10px; /* Increased space */
     word-break: break-all;
 }
 
 .sidebar-document-info p {
     font-size: 0.85rem;
     color: var(--text-secondary);
-    margin-bottom: 15px;
+    margin-bottom: 15px; /* Good */
 }
 
 .sidebar-document-preview {
@@ -104,7 +112,7 @@ body {
     max-height: 250px;
     object-fit: contain;
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: var(--border-radius-sm); /* Consistent rounding */
     background-color: var(--content-bg);
     margin-top: 10px;
 }
@@ -113,17 +121,21 @@ body {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    overflow-y: hidden; /* Important for chat layout */
+    overflow-y: hidden;
     background-color: var(--content-bg);
+    /* padding: 0; /* No padding for main-content itself, handled by views */
 }
 
 .error-message-bar {
     background-color: var(--error-bg);
     color: var(--error-color);
-    padding: 12px 20px;
+    padding: 10px 20px; /* Adjusted padding */
     text-align: center;
     font-size: 0.9rem;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--error-color); /* Make border match text for stronger visual cue */
+    margin: 0; /* Remove if it pushes content, or add to specific views */
+    border-radius: 0; /* Full width, no rounding needed here */
+    font-weight: 500;
 }
 
 /* Upload View */
@@ -315,15 +327,17 @@ body {
 
 .chat-message {
     display: flex;
-    max-width: 75%; /* Max width of message bubble */
-    font-size: 0.95rem;
+    max-width: 70%; /* Adjusted max-width */
+    font-size: 0.95rem; /* Existing base size, seems okay */
     line-height: 1.5;
+    /* Add margin-bottom for spacing if chat-area gap isn't enough or for more control */
+    /* gap in .chat-area (15px) should handle this, but can add margin-bottom here if needed */
 }
 
 .chat-message .avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+    width: 36px; /* Slightly larger avatar */
+    height: 36px;
+    border-radius: 50%; /* Ensure circular */
     background-color: var(--text-secondary);
     color: white;
     display: flex;
@@ -331,14 +345,16 @@ body {
     justify-content: center;
     font-weight: 500;
     font-size: 0.9rem;
-    margin-right: 10px;
+    margin-right: 12px; /* Adjusted margin */
     flex-shrink: 0;
+    /* Ensure vertical alignment with first line of text, usually okay with flex align-items: flex-start on parent or specific alignment here if needed */
 }
 
 .chat-message .message-content {
-    padding: 10px 15px;
-    border-radius: 18px;
+    padding: 12px 18px; /* Increased padding */
+    border-radius: var(--border-radius-lg); /* Consistent, larger radius */
     word-wrap: break-word;
+    box-shadow: var(--shadow-sm); /* Add a subtle shadow to bubbles */
 }
 
 .chat-message.user {
@@ -348,38 +364,86 @@ body {
 
 .chat-message.user .avatar {
     margin-right: 0;
-    margin-left: 10px;
-    background-color: var(--primary-accent);
+    margin-left: 12px; /* Adjusted margin to match .avatar's margin-right */
+    background-color: var(--user-message-bg); /* Use variable */
 }
 .chat-message.user .message-content {
-    background-color: var(--primary-accent);
+    background-color: var(--user-message-bg); /* Use variable */
     color: white;
-    border-bottom-right-radius: 4px; /* Modern chat bubble shape */
+    /* border-bottom-right-radius: 4px; */ /* Removed for consistent large radius */
 }
 
 .chat-message.ai {
     align-self: flex-start;
 }
+.chat-message.ai .avatar {
+    /* background-color: var(--ai-avatar-bg, var(--text-secondary)); /* Optional: specific AI avatar bg */
+}
 .chat-message.ai .message-content {
-    background-color: var(--ai-message-bg);
+    background-color: var(--ai-message-bg); /* Use variable */
     color: var(--text-primary);
-    border-bottom-left-radius: 4px; /* Modern chat bubble shape */
+    /* border-bottom-left-radius: 4px; */ /* Removed for consistent large radius */
 }
 
+/* Ensure thinking styles don't override the bubble shape or bg, only add indicator via TSX */
 .chat-message.ai.thinking .message-content {
-    background-color: var(--ai-thinking-bg);
-    color: var(--ai-thinking-text);
+  /* The original var(--ai-thinking-bg) and var(--ai-thinking-text) are removed */
+  /* Specific background for thinking messages is removed, relies on default AI bubble style now */
 }
 .chat-message.ai.thinking .avatar {
-    background-color: var(--ai-thinking-text);
+    /* The original background-color: var(--ai-thinking-text) is removed */
+    /* No specific avatar change for thinking, use default AI avatar */
 }
 
-.chat-message.ai .message-sender {
-    font-weight: 600;
+.chat-message.ai .message-sender { /* This class is no longer used directly for the "AI (model)" text */
+    /* Styles below were for the old combined sender+model display */
+    /* font-weight: 600; */
+    /* font-size: 0.8em; */
+    /* display: block; */
+    /* margin-bottom: 4px; */
+    /* color: var(--text-secondary); */
+}
+
+/* New styles for the AI message header structure */
+.ai-message-header {
+    display: flex;
+    align-items: center;
+    font-weight: bold; /* Makes "AI" in sender-label bold */
+    margin-bottom: 4px; /* Space between header and message text */
+    font-size: 0.9em; /* Base size for header elements */
+}
+
+.message-sender-label {
+    margin-right: 8px;
+    color: var(--text-primary); /* Or a specific color for AI name */
+}
+
+.thinking-indicator {
+    color: var(--primary-accent); /* Use accent color for the thinking icon */
+    margin-right: 8px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.thinking-indicator i {
+    font-size: 0.9em; /* Slightly smaller than text or adjust as needed */
+}
+
+.model-tag {
     font-size: 0.8em;
-    display: block;
-    margin-bottom: 4px;
     color: var(--text-secondary);
+    font-weight: normal; /* Ensure it's not bold if header is bold */
+}
+
+/* Adjust existing styles if necessary */
+.chat-message.ai.thinking .message-content {
+  /* background-color: var(--ai-thinking-bubble-background, #e1eefe); /* Example existing style */
+  /* Let's remove the specific background for the whole bubble if we have a good indicator */
+  /* The original var(--ai-thinking-bg) and var(--ai-thinking-text) are removed */
+}
+
+.chat-message.ai.thinking .avatar {
+    /* The original background-color: var(--ai-thinking-text) is removed */
 }
 
 .chat-message.ai.typing .message-content {
@@ -395,6 +459,9 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    padding: 15px 20px; /* Increased padding */
+    /* background-color: var(--content-bg); /* Already set, but ensure it's intentional */
+    /* border-top: 1px solid var(--border-color); /* Already set */
 }
 
 .model-selection-chat {
@@ -438,29 +505,30 @@ body {
 
 .chat-input-field {
     flex-grow: 1;
-    padding: 12px 18px;
+    padding: 12px 18px; /* Comfortable padding */
     border: 1px solid var(--border-color);
-    border-radius: 22px; /* Pill shape */
-    font-size: 0.95rem;
+    border-radius: var(--border-radius-md); /* Consistent rounded corners */
+    font-size: 1rem; /* Slightly larger font size */
     font-family: var(--font-family);
-    resize: none; /* if it's a textarea */
+    resize: none;
+    box-shadow: none; /* Remove any default browser shadow if needed */
 }
 
 .chat-input-field:focus {
     outline: none;
     border-color: var(--primary-accent);
-    box-shadow: 0 0 0 2px rgba(26, 115, 232, .2);
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, .25); /* Slightly more pronounced focus like some modern UIs */
 }
 
 .send-btn {
     background-color: var(--primary-accent);
     color: white;
     border: none;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
+    border-radius: var(--border-radius-md); /* Matching input field or circular if preferred: 50% */
+    width: 48px; /* Slightly larger */
+    height: 48px; /* Slightly larger */
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1.3rem; /* Larger icon */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -473,13 +541,13 @@ body {
 }
 
 .send-btn:disabled {
-    background-color: #ccc;
+    background-color: #b0b0b0; /* Softer disabled color */
     cursor: not-allowed;
 }
 .send-btn .spinner {
-    width: 18px;
-    height: 18px;
-    border-width: 2px;
+    width: 20px; /* Adjusted for new button size */
+    height: 20px; /* Adjusted for new button size */
+    border-width: 3px;
 }
 
 
@@ -511,8 +579,16 @@ body {
 
 /* Font Awesome Icons specific color if needed */
 .fa-file-pdf, .fa-cogs, .fa-paper-plane, .fa-brain, .fa-plus, .fa-redo {
-    margin-right: 0px; /* Reset previous margin if any */
+    /* margin-right: 0px; /* Reset by gap in buttons etc. */
+    /* Individual icon adjustments can be made if needed */
 }
+.new-doc-btn i.fa-plus {
+    font-size: 0.9em; /* Example: if icon seems too large */
+}
+.send-btn i.fa-paper-plane {
+    /* font-size: 1.1em; /* Handled by parent font-size on send-btn */
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

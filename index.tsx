@@ -289,8 +289,20 @@ const App: React.FC = () => {
                                      {msg.sender === 'ai' ? 'AI' : <i className="fas fa-user"></i>}
                                    </div>
                                    <div className="message-content">
-                                     {msg.sender === 'ai' && <span className="message-sender">AI ({msg.modelUsed || 'system'})</span>}
-                                     {msg.text}
+                                    {msg.sender === 'ai' && (
+                                        <div className="ai-message-header">
+                                            <span className="message-sender-label">AI</span>
+                                            {msg.modelUsed === 'thinking' && (
+                                                <span className="thinking-indicator" title="Thinking model">
+                                                    <i className="fas fa-brain"></i>
+                                                </span>
+                                            )}
+                                            {msg.modelUsed && msg.modelUsed !== 'thinking' && (
+                                                 <span className="model-tag">({msg.modelUsed})</span>
+                                            )}
+                                        </div>
+                                    )}
+                                    {msg.text}
                                    </div>
                                 </div>
                             ))}
