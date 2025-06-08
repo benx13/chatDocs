@@ -164,6 +164,10 @@ const App: React.FC = () => {
         }
     };
     
+    const toggleThinkMode = () => {
+        setSelectedChatModel(prev => prev === 'plain' ? 'thinking' : 'plain');
+    };
+
     const startNewDocument = () => {
         setCurrentView('upload');
         setPdfFile(null);
@@ -251,86 +255,58 @@ const App: React.FC = () => {
                 )}
 
                 {currentView === 'chat' && pdfFile && (
-                    <div className="chat-view" aria-labelledby="chat-title-main">
-                        {/* Document name is now in .main-header-controls */}
-                        {/* <h2 id="chat-title-main" className="chat-header">Chat with: {pdfFile.name}</h2> */}
-                        
-                        {/* Display simplified OCR context if available and not too long, or make it toggleable */}
-                        {ocrResultText && (
-                             <div className="ocr-context-preview-chat">
-                                <strong>Document Context (Summary):</strong> {ocrResultText.substring(0,150)}...
-                             </div>
-                        )}
-
-                        {/* Old model selection chat removed from here */}
-
-                        <div className="chat-area" ref={chatAreaRef} aria-live="polite" aria-atomic="false">
+                    <div className="chat-view">
+                        <div ref={chatAreaRef} className="chat-area">
                             {chatMessages.map((msg) => (
-                                <div key={msg.id} className={`chat-message ${msg.sender} ${msg.sender === 'ai' && msg.modelUsed === 'thinking' ? 'thinking' : ''}`}
-                                    role="log" aria-label={`${msg.sender} message`}
-                                >
-                                   <div className="avatar">
-                                     {msg.sender === 'ai' ? 'AI' : <i className="fas fa-user"></i>}
-                                   </div>
-                                   <div className="message-content">
-                                    {msg.sender === 'ai' && (
-                                        <div className="ai-message-header">
-                                            <span className="message-sender-label">AI</span>
-                                            {msg.modelUsed === 'thinking' && (
-                                                <span className="thinking-indicator" title="Thinking model">
-                                                    <i className="fas fa-brain"></i>
-                                                </span>
-                                            )}
-                                            {msg.modelUsed && msg.modelUsed !== 'thinking' && (
-                                                 <span className="model-tag">({msg.modelUsed})</span>
-                                            )}
-                                        </div>
-                                    )}
-                                    {msg.text}
-                                   </div>
+                                <div key={msg.id} className={`chat-message ${msg.sender}`}>
+                                    <div className="avatar">
+                                        <i className={`fas ${msg.sender === 'user' ? 'fa-user' : 'fa-robot'}`}></i>
+                                    </div>
+                                    <div className="message-content">
+                                        <p>{msg.text}</p>
+                                    </div>
                                 </div>
                             ))}
                             {isAiTyping && (
-                                <div className="chat-message ai typing" aria-label="AI is typing">
-                                    <div className="avatar">AI</div>
+                                <div className="chat-message ai typing">
+                                    <div className="avatar">
+                                        <i className="fas fa-robot"></i>
+                                    </div>
                                     <div className="message-content">
-                                        <span className="spinner"></span> Typing...
+                                        <span className="spinner"></span>
                                     </div>
                                 </div>
                             )}
                         </div>
-
                         <div className="chat-input-area">
-                            <div className="model-bubble-buttons" role="radiogroup" aria-label="Select AI Model">
-                                <button
-                                    onClick={() => setSelectedChatModel('plain')}
-                                    className={`model-bubble-btn ${selectedChatModel === 'plain' ? 'active' : ''}`}
-                                    aria-pressed={selectedChatModel === 'plain'}
-                                >
-                                    Plain
-                                </button>
-                                <button
-                                    onClick={() => setSelectedChatModel('thinking')}
-                                    className={`model-bubble-btn ${selectedChatModel === 'thinking' ? 'active' : ''}`}
-                                    aria-pressed={selectedChatModel === 'thinking'}
-                                >
-                                    <i className="fas fa-brain"></i> Thinking
-                                </button>
-                            </div>
-                            <div className="chat-input-controls"> {/* New wrapper for input and send button */}
-                                <input
-                                    type="text"
+                            <div className="chat-input-container">
+                                <textarea
                                     className="chat-input-field"
+                                    placeholder="Ask a question about the document..."
                                     value={currentMessage}
                                     onChange={(e) => setCurrentMessage(e.target.value)}
-                                    onKeyPress={(e) => e.key === 'Enter' && !isAiTyping && handleSendMessage()}
-                                    placeholder="Ask something about your document..."
-                                    aria-label="Type your message"
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' && !e.shiftKey) {
+                                            e.preventDefault();
+                                            handleSendMessage();
+                                        }
+                                    }}
                                     disabled={isAiTyping}
+                                    rows={1}
                                 />
-                                <button onClick={handleSendMessage} className="send-btn" disabled={isAiTyping || !currentMessage.trim()} aria-label="Send message">
-                                    {isAiTyping ? <span className="spinner"></span> : <i className="fas fa-paper-plane"></i>}
-                                </button>
+                                <div className="chat-input-controls">
+                                    <button 
+                                        onClick={toggleThinkMode} 
+                                        className={`model-bubble-btn ${selectedChatModel === 'thinking' ? 'active' : ''}`}
+                                        title={selectedChatModel === 'thinking' ? 'Switch to normal mode' : 'Switch to thoughtful mode'}
+                                    >
+                                        <i className={`fas ${selectedChatModel === 'thinking' ? 'fa-brain' : 'fa-lightbulb'}`}></i>
+                                        <span>{selectedChatModel === 'thinking' ? 'Thinking' : 'Think'}</span>
+                                    </button>
+                                    <button onClick={handleSendMessage} className="send-btn" disabled={!currentMessage.trim() || isAiTyping}>
+                                        <i className="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -352,7 +328,5 @@ const App: React.FC = () => {
 };
 
 const container = document.getElementById('root');
-if (container) {
-    const root = createRoot(container);
-    root.render(<App />);
-}
+const root = createRoot(container!);
+root.render(<App />);

@@ -1,24 +1,68 @@
 :root {
-    --primary-bg: #f8f9fa; /* Light grey background */
-    --content-bg: #ffffff; /* White for content areas */
-    --sidebar-bg: #f1f3f5; /* Slightly darker for sidebar */
-    --primary-accent: #1a73e8; /* Google Blue */
-    --primary-accent-hover: #1765cc;
-    --text-primary: #202124; /* Dark grey for text */
-    --text-secondary: #5f6368; /* Lighter grey for secondary text */
-    --border-color: #dadce0; /* Subtle border color */
-    --error-color: #d93025;
-    --error-bg: #fce8e6;
-    --shadow-sm: 0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
-    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    --user-message-bg: var(--primary-accent); /* User messages use primary accent */
-    --ai-message-bg: #f0f0f0; /* Slightly lighter grey for AI messages */
-    /* --ai-thinking-bg: #e6f4ea; /* Retaining for reference, but not used for bubble background now */
-    /* --ai-thinking-text: #137333; /* Retaining for reference */
-    --border-radius-sm: 6px; /* Slightly smaller base for some elements if needed */
-    --border-radius-md: 12px;
-    --border-radius-lg: 16px;
+    /* Warm Beige Primary Colors */
+    --primary-bg: linear-gradient(135deg, #f5f1eb 0%, #e8dcc0 100%);
+    --secondary-bg: linear-gradient(135deg, #d4a574 0%, #c2956e 100%);
+    --content-bg: linear-gradient(135deg, #f9f6f0 0%, #f0e6d2 100%);
+    --primary-accent: linear-gradient(135deg, #d4a574 0%, #b8936a 100%);
+    --primary-accent-hover: linear-gradient(135deg, #c2956e 0%, #a67c52 100%);
+    
+    /* Solid Fallback Colors */
+    --primary-bg-solid: #f5f1eb;
+    --secondary-bg-solid: #d4a574;
+    --content-bg-solid: #f9f6f0;
+    --primary-accent-solid: #d4a574;
+    --primary-accent-hover-solid: #c2956e;
+    
+    /* Text Colors */
+    --text-primary: #3c3530;
+    --text-secondary: #6b5b4f;
+    --text-muted: #8b7355;
+    --text-light: #ffffff;
+    --text-accent: #5d4037;
+    
+    /* Border & Background */
+    --border-color: rgba(139, 115, 85, 0.2);
+    --border-light: rgba(139, 115, 85, 0.1);
+    --glass-bg: rgba(249, 246, 240, 0.8);
+    --glass-bg-dark: rgba(60, 53, 48, 0.1);
+    
+    /* Status Colors */
+    --error-color: #d32f2f;
+    --error-bg: linear-gradient(135deg, #ffcdd2 0%, #f8bbd9 100%);
+    --success-color: #388e3c;
+    --success-bg: linear-gradient(135deg, #c8e6c9 0%, #dcedc8 100%);
+    
+    /* Warm Shadows */
+    --shadow-sm: 0 2px 4px rgba(60, 53, 48, 0.1), 0 1px 2px rgba(60, 53, 48, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(60, 53, 48, 0.1), 0 2px 4px -1px rgba(60, 53, 48, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(60, 53, 48, 0.1), 0 4px 6px -2px rgba(60, 53, 48, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(60, 53, 48, 0.1), 0 10px 10px -5px rgba(60, 53, 48, 0.04);
+    --shadow-glow: 0 0 20px rgba(212, 165, 116, 0.3);
+    --shadow-glow-warm: 0 0 15px rgba(194, 149, 110, 0.4);
+    --shadow-glow-light: 0 0 12px rgba(245, 241, 235, 0.6);
+    
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    
+    /* Message Backgrounds */
+    --user-message-bg: linear-gradient(135deg, #d4a574 0%, #c2956e 100%);
+    --ai-message-bg: linear-gradient(135deg, #f0e6d2 0%, #e8dcc0 100%);
+    
+    /* Border Radius */
+    --border-radius-sm: 0.5rem;
+    --border-radius-md: 0.75rem;
+    --border-radius-lg: 1rem;
+    --border-radius-xl: 1.5rem;
+    
+    /* Creative Beige Theme */
+    --creative-beige-light: linear-gradient(135deg, #faf7f2 0%, #f5f1eb 100%);
+    --creative-beige-medium: linear-gradient(135deg, #f0e6d2 0%, #e8dcc0 100%);
+    --creative-beige-dark: linear-gradient(135deg, #d4a574 0%, #c2956e 100%);
+    
+    /* Accent Colors - Updated */
+    --accent-light-bg: linear-gradient(135deg, #f0e6d2 0%, #e8dcc0 100%);
+    --accent-text: linear-gradient(135deg, #8b7355 0%, #6b5b4f 100%);
+    --accent-dark: linear-gradient(135deg, #c2956e 0%, #a67c52 100%);
 }
 
 * {
@@ -29,159 +73,121 @@
 
 html, body, #root {
     height: 100%;
-    overflow: hidden; /* Prevent body scroll, manage scroll in specific areas */
+    overflow: hidden;
 }
 
 body {
     font-family: var(--font-family);
-    background-color: var(--primary-bg);
+    background: var(--primary-bg);
     color: var(--text-primary);
-    font-size: 14px; /* Base font size */
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
 }
 
 .app-shell {
-    display: grid; /* Changed to grid as per subtask instruction */
-    grid-template-columns: 1fr; /* Ensures main-content takes full width */
+    display: grid;
+    grid-template-columns: 1fr;
     height: 100vh;
+    background: var(--primary-bg);
+    position: relative;
 }
 
-/* Sidebar Styles - To be removed or commented out */
-/*
-.sidebar {
-    width: 280px;
-    background-color: var(--sidebar-bg);
-    padding: 20px;
-    border-right: 1px solid var(--border-color);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    overflow-y: auto;
-}
 
-.sidebar-header {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    padding-bottom: 15px;
-    border-bottom: 1px solid var(--border-color);
-}
-*/
-
-/* .new-doc-btn still exists but will be modified by .global-new-doc-btn */
-/* Original .new-doc-btn styles might need some overrides if they were too sidebar-specific */
-.new-doc-btn {
-    background-color: var(--primary-accent);
-    color: white;
-    padding: 12px 18px; /* Slightly more padding */
-    border: none;
-    border-radius: var(--border-radius-md); /* Consistent rounding */
-    cursor: pointer;
-    font-size: 0.95rem; /* Slightly larger font */
-    font-weight: 500;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px; /* Increased gap for icon */
-    /* width: 100%; */ /* This will be overridden by .global-new-doc-btn or removed */
-    box-shadow: var(--shadow-sm);
-}
-.new-doc-btn i {
-    /* margin-right: 4px; /* Handled by gap now */
-}
-
-.new-doc-btn:hover {
-    background-color: var(--primary-accent-hover);
-    box-shadow: var(--shadow-md);
-}
-
-/*
-.sidebar-document-info {
-    margin-top: 10px;
-}
-
-.sidebar-document-info h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 10px;
-    word-break: break-all;
-}
-
-.sidebar-document-info p {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    margin-bottom: 15px;
-}
-
-.sidebar-document-preview {
-    width: 100%;
-    max-height: 250px;
-    object-fit: contain;
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-sm);
-    background-color: var(--content-bg);
-    margin-top: 10px;
-}
-*/
 
 .main-content {
-    flex-grow: 1; /* Takes full width as sidebar is gone */
-    width: 100%; /* Ensure it takes full width */
+    flex-grow: 1;
+    width: 100%;
     display: flex;
     flex-direction: column;
     overflow-y: hidden;
-    background-color: var(--content-bg);
+    background: transparent;
+    backdrop-filter: blur(10px);
+    position: relative;
 }
 
-/* New styles for relocated button container and button itself */
 .main-header-controls {
-    display: flex; /* Use flex for alignment */
-    justify-content: space-between; /* Aligns button to right, title to left */
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 15px 20px; /* Padding for the header area */
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 0px; /* Space before view content, can be adjusted */
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border-light);
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-glow);
+    border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+}
+
+.new-doc-btn {
+    background: var(--primary-accent);
+    color: var(--text-light);
+    padding: 12px 20px;
+    border: none;
+    border-radius: var(--border-radius-xl);
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: var(--shadow-glow);
+    position: relative;
+    overflow: hidden;
+}
+
+.new-doc-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.new-doc-btn:hover::before {
+    left: 100%;
+}
+
+.new-doc-btn:hover {
+    background: var(--primary-accent-hover);
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-2px) scale(1.05);
 }
 
 .global-new-doc-btn {
-    /* .new-doc-btn base styles are inherited */
-    width: auto; /* Override width: 100% if it was set in .new-doc-btn */
-    padding: 10px 15px; /* Adjust padding as needed */
-    font-size: 0.9rem; /* Slightly smaller if preferred for header */
+    width: auto;
+    padding: 10px 16px;
+    font-size: 0.875rem;
 }
 
 .document-title-header {
-    font-size: 1.1rem;
-    font-weight: 500;
+    font-size: 1.125rem;
+    font-weight: 600;
     color: var(--text-primary);
     text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    padding-right: 15px; /* Space from button if they get close */
+    padding-right: 16px;
 }
-
-.ocr-context-preview-chat {
-    padding: 8px 20px;
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    background-color: var(--primary-bg); /* Subtle background */
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 10px; /* Space before model selection */
-}
-
 
 .error-message-bar {
-    background-color: var(--error-bg);
+    background: var(--error-bg);
     color: var(--error-color);
-    padding: 10px 20px; /* Adjusted padding */
+    padding: 12px 24px;
     text-align: center;
-    font-size: 0.9rem;
-    border-bottom: 1px solid var(--error-color); /* Make border match text for stronger visual cue */
-    margin: 0; /* Remove if it pushes content, or add to specific views */
-    border-radius: 0; /* Full width, no rounding needed here */
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--error-color);
+    margin: 0;
+    border-radius: 0;
     font-weight: 500;
+    backdrop-filter: blur(10px);
 }
 
 /* Upload View */
@@ -191,42 +197,65 @@ body {
     align-items: center;
     justify-content: center;
     flex-grow: 1;
-    padding: 40px;
+    padding: 48px;
     text-align: center;
+    background: var(--creative-beige-light);
 }
 
 .file-upload-view h1 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 15px;
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--accent-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+    letter-spacing: -0.025em;
 }
 
 .file-upload-view p {
-    font-size: 1rem;
+    font-size: 1.125rem;
     color: var(--text-secondary);
-    margin-bottom: 30px;
-    max-width: 400px;
+    margin-bottom: 32px;
+    max-width: 480px;
+    line-height: 1.6;
 }
 
 .file-input-label {
-    background-color: var(--primary-accent);
-    color: white;
-    padding: 15px 30px;
-    border-radius: 25px; /* Pill shape */
+    background: var(--secondary-bg);
+    color: var(--text-light);
+    padding: 18px 36px;
+    border-radius: var(--border-radius-xl);
     cursor: pointer;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    box-shadow: var(--shadow-sm);
+    gap: 12px;
+    box-shadow: var(--shadow-glow-warm);
+    overflow: hidden;
+}
+
+.file-input-label::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s;
+}
+
+.file-input-label:hover::before {
+    left: 100%;
 }
 
 .file-input-label:hover {
-    background-color: var(--primary-accent-hover);
-    box-shadow: var(--shadow-md);
+    background: var(--accent-dark);
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-3px) scale(1.05);
 }
 
 .file-input-label input[type="file"] {
@@ -240,572 +269,627 @@ body {
     align-items: center;
     justify-content: center;
     flex-grow: 1;
-    padding: 40px;
+    padding: 48px;
     text-align: center;
+    background: var(--creative-beige-medium);
 }
 
 .ocr-config-view h2 {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    font-weight: 800;
+    background: var(--creative-beige-dark);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 32px;
+    letter-spacing: -0.025em;
+}
+
+/* OCR Configuration Components */
+.slider-container {
+    margin: 32px 0;
+    padding: 24px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border-radius: var(--border-radius-xl);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-glow-warm);
+    max-width: 400px;
+    width: 100%;
+}
+
+.ocr-effort-label {
+    display: block;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: 10px;
+    margin-bottom: 16px;
+    text-align: center;
 }
 
-.ocr-config-view .document-name {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    margin-bottom: 30px;
-    font-weight: 500;
-}
-
-.slider-container {
+#ocr-effort-slider {
     width: 100%;
-    max-width: 400px;
-    margin: 20px 0;
-}
-
-.slider-container .ocr-effort-label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: 500;
-    color: var(--text-primary);
-    font-size: 0.9rem;
-}
-
-.slider-container input[type="range"] {
-    width: 100%;
-    cursor: pointer;
-    accent-color: var(--primary-accent); /* Modern way to style slider */
-    -webkit-appearance: none; /* Override default iOS styles */
-    appearance: none;
     height: 8px;
-    background: #ddd;
-    border-radius: 4px;
+    border-radius: var(--border-radius-lg);
+    background: linear-gradient(to right, 
+        var(--secondary-bg-solid) 0%, 
+        var(--primary-accent-solid) 50%, 
+        var(--creative-beige-dark) 100%);
     outline: none;
-}
-.slider-container input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  background: var(--primary-accent);
-  border-radius: 50%;
-  cursor: pointer;
-}
-.slider-container input[type="range"]::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  background: var(--primary-accent);
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
 }
 
+#ocr-effort-slider:hover {
+    opacity: 1;
+}
+
+#ocr-effort-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: var(--primary-accent-solid);
+    cursor: pointer;
+    box-shadow: var(--shadow-glow);
+    border: 2px solid var(--text-light);
+    transition: all 0.3s ease;
+}
+
+#ocr-effort-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: var(--shadow-xl);
+}
+
+#ocr-effort-slider::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: var(--primary-accent-solid);
+    cursor: pointer;
+    box-shadow: var(--shadow-glow);
+    border: 2px solid var(--text-light);
+    transition: all 0.3s ease;
+}
 
 .slider-labels {
     display: flex;
     justify-content: space-between;
-    font-size: 0.8rem;
+    margin-top: 12px;
+    font-size: 0.875rem;
     color: var(--text-secondary);
-    padding: 5px 0;
+    font-weight: 500;
 }
 
 .process-doc-btn {
-    background-color: var(--primary-accent);
-    color: white;
-    padding: 12px 25px;
+    background: var(--secondary-bg);
+    color: var(--text-light);
+    padding: 16px 32px;
     border: none;
-    border-radius: 20px; /* Pill shape */
+    border-radius: var(--border-radius-xl);
     cursor: pointer;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
-    display: inline-flex;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    min-width: 180px;
-    box-shadow: var(--shadow-sm);
+    gap: 12px;
+    box-shadow: var(--shadow-glow-warm);
+    margin-top: 24px;
+    position: relative;
+    overflow: hidden;
 }
 
-.process-doc-btn:hover {
-    background-color: var(--primary-accent-hover);
-    box-shadow: var(--shadow-md);
+.process-doc-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s;
+}
+
+.process-doc-btn:hover::before {
+    left: 100%;
+}
+
+.process-doc-btn:hover:not(:disabled) {
+    background: var(--accent-dark);
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-2px) scale(1.02);
 }
 
 .process-doc-btn:disabled {
-    background-color: #ccc;
+    background: var(--text-muted);
     cursor: not-allowed;
-    box-shadow: none;
+    transform: none;
+    opacity: 0.7;
 }
 
 .loading-text-ocr {
-    margin-top: 15px;
-    font-size: 0.9rem;
     color: var(--text-secondary);
+    font-style: italic;
+    margin-top: 16px;
+    font-size: 0.95rem;
 }
 
 /* Chat View */
 .chat-view {
     display: flex;
     flex-direction: column;
-    height: 100%; /* Fill main-content */
-    overflow: hidden;
-}
-
-.chat-header {
-    padding: 15px 20px;
-    border-bottom: 1px solid var(--border-color);
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    text-align: center; /* Or left if preferred */
+    height: 100%;
+    background: var(--creative-beige-light);
 }
 
 .chat-area {
     flex-grow: 1;
     overflow-y: auto;
-    padding: 20px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 24px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 115, 85, 0.3) transparent;
+    max-width: 768px;
+    margin: 0 auto;
+    width: 100%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
+}
+
+.chat-area::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-area::-webkit-scrollbar-thumb {
+    background-color: rgba(139, 115, 85, 0.2);
+    border-radius: 3px;
+}
+
+.chat-area::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(139, 115, 85, 0.3);
 }
 
 .chat-message {
     display: flex;
-    max-width: 70%; /* Adjusted max-width */
-    font-size: 0.95rem; /* Existing base size, seems okay */
-    line-height: 1.5;
-    /* Add margin-bottom for spacing if chat-area gap isn't enough or for more control */
-    /* gap in .chat-area (15px) should handle this, but can add margin-bottom here if needed */
+    align-items: flex-start;
+    gap: 12px;
+    max-width: 85%;
+    animation: fadeInUp 0.3s ease-out;
 }
 
-.chat-message .avatar {
-    width: 36px; /* Slightly larger avatar */
-    height: 36px;
-    border-radius: 50%; /* Ensure circular */
-    background-color: var(--text-secondary);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 500;
-    font-size: 0.9rem;
-    margin-right: 12px; /* Adjusted margin */
-    flex-shrink: 0;
-    /* Ensure vertical alignment with first line of text, usually okay with flex align-items: flex-start on parent or specific alignment here if needed */
-}
-
-.chat-message .message-content {
-    padding: 12px 18px; /* Increased padding */
-    border-radius: var(--border-radius-lg); /* Consistent, larger radius */
-    word-wrap: break-word;
-    box-shadow: var(--shadow-sm); /* Add a subtle shadow to bubbles */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .chat-message.user {
     align-self: flex-end;
-    flex-direction: row-reverse; /* Avatar on the right */
-}
-
-.chat-message.user .avatar {
-    margin-right: 0;
-    margin-left: 12px; /* Adjusted margin to match .avatar's margin-right */
-    background-color: var(--user-message-bg); /* Use variable */
-}
-.chat-message.user .message-content {
-    background-color: var(--user-message-bg); /* Use variable */
-    color: white;
-    /* border-bottom-right-radius: 4px; */ /* Removed for consistent large radius */
+    flex-direction: row-reverse;
 }
 
 .chat-message.ai {
     align-self: flex-start;
 }
-.chat-message.ai .avatar {
-    /* background-color: var(--ai-avatar-bg, var(--text-secondary)); /* Optional: specific AI avatar bg */
-}
-.chat-message.ai .message-content {
-    background-color: var(--ai-message-bg); /* Use variable */
-    color: var(--text-primary);
-    /* border-bottom-left-radius: 4px; */ /* Removed for consistent large radius */
-}
 
-/* Ensure thinking styles don't override the bubble shape or bg, only add indicator via TSX */
-.chat-message.ai.thinking .message-content {
-  /* The original var(--ai-thinking-bg) and var(--ai-thinking-text) are removed */
-  /* Specific background for thinking messages is removed, relies on default AI bubble style now */
-}
-.chat-message.ai.thinking .avatar {
-    /* The original background-color: var(--ai-thinking-text) is removed */
-    /* No specific avatar change for thinking, use default AI avatar */
-}
-
-.chat-message.ai .message-sender { /* This class is no longer used directly for the "AI (model)" text */
-    /* Styles below were for the old combined sender+model display */
-    /* font-weight: 600; */
-    /* font-size: 0.8em; */
-    /* display: block; */
-    /* margin-bottom: 4px; */
-    /* color: var(--text-secondary); */
-}
-
-/* New styles for the AI message header structure */
-.ai-message-header {
-    display: flex;
-    align-items: center;
-    font-weight: bold; /* Makes "AI" in sender-label bold */
-    margin-bottom: 4px; /* Space between header and message text */
-    font-size: 0.9em; /* Base size for header elements */
-}
-
-.message-sender-label {
-    margin-right: 8px;
-    color: var(--text-primary); /* Or a specific color for AI name */
-}
-
-.thinking-indicator {
-    color: var(--primary-accent); /* Use accent color for the thinking icon */
-    margin-right: 8px;
-    display: inline-flex;
-    align-items: center;
-}
-
-.thinking-indicator i {
-    font-size: 0.9em; /* Slightly smaller than text or adjust as needed */
-}
-
-.model-tag {
-    font-size: 0.8em;
-    color: var(--text-secondary);
-    font-weight: normal; /* Ensure it's not bold if header is bold */
-}
-
-/* Adjust existing styles if necessary */
-.chat-message.ai.thinking .message-content {
-  /* background-color: var(--ai-thinking-bubble-background, #e1eefe); /* Example existing style */
-  /* Let's remove the specific background for the whole bubble if we have a good indicator */
-  /* The original var(--ai-thinking-bg) and var(--ai-thinking-text) are removed */
-}
-
-.chat-message.ai.thinking .avatar {
-    /* The original background-color: var(--ai-thinking-text) is removed */
-}
-
-.chat-message.ai.typing .message-content {
-    font-style: italic;
-    color: var(--text-secondary);
-}
-
-
-.chat-input-area {
-    padding: 15px 20px;
-    border-top: 1px solid var(--border-color);
-    background-color: var(--content-bg); /* Ensure it's on top */
-    display: flex;
-    /* align-items: center; */ /* Changed to allow buttons on top */
-    flex-direction: column; /* Stack bubble buttons above input row */
-    gap: 10px; /* Spacing between button row and input row */
-    padding: 10px 15px; /* Adjusted padding */
-    /* border-top: 1px solid var(--border-color); */ /* Already set */
-    /* background-color: var(--content-bg); */ /* Already set */
-}
-
-/* Styles for new model bubble buttons */
-.model-bubble-buttons {
-    display: flex;
-    justify-content: center; /* Center buttons in their row */
-    align-items: center;
-    gap: 8px; /* Spacing between individual buttons */
-    width: 100%; /* Take full width to allow centering */
-    /* margin-bottom: 8px; /* Replaced by gap in .chat-input-area */
-}
-
-.model-bubble-btn {
-    background-color: #f0f0f0; /* Using a light grey, can be a var */
-    color: #333; /* Dark text, can be a var */
-    border: 1px solid var(--border-color);
-    padding: 6px 14px; /* Adjusted padding */
-    border-radius: var(--border-radius-lg, 16px); /* Pill shape */
-    font-size: 0.85em; /* Slightly smaller font */
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-    display: inline-flex; /* To align icon and text */
-    align-items: center;
-}
-
-.model-bubble-btn i {
-    margin-right: 6px; /* Space between icon and text */
-    font-size: 0.9em; /* Adjust icon size relative to button text */
-}
-
-.model-bubble-btn.active {
-    background-color: var(--primary-accent);
-    color: white;
-    border-color: var(--primary-accent);
-    font-weight: bold; /* Bolder text for active state */
-}
-
-.model-bubble-btn:hover:not(.active) {
-    background-color: #e0e0e0; /* Slightly darker on hover for non-active */
-    border-color: #b0b0b0;
-}
-
-
-/* Old .model-selection-chat styles - to be removed or commented */
-/*
-.model-selection-chat {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-color);
-    margin: 0 20px 10px 20px;
-}
-
-.model-selection-chat span {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-}
-
-.model-selection-chat label {
-    font-size: 0.85rem;
-    color: var(--text-primary);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 4px 8px;
-    border-radius: 15px;
-    transition: background-color 0.2s ease;
-}
-.model-selection-chat input[type="radio"] {
-    margin-right: 5px;
-    accent-color: var(--primary-accent);
-    transform: scale(0.9);
-}
-.model-selection-chat label:hover {
-    background-color: #f0f0f0;
-}
-.model-selection-chat input[type="radio"]:checked + span {
-   font-weight: 600;
-   color: var(--primary-accent);
-}
-*/
-
-/* Wrapper for the text input and send button to keep them in a row */
-.chat-input-controls {
-    display: flex;
-    width: 100%;
-    gap: 10px; /* Same gap as .chat-input-area had for its items */
-    align-items: center; /* Vertically align input and button */
-}
-
-.chat-input-field {
-    flex-grow: 1;
-    padding: 12px 18px; /* Comfortable padding */
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md); /* Consistent rounded corners */
-    font-size: 1rem; /* Slightly larger font size */
-    font-family: var(--font-family);
-    resize: none;
-    box-shadow: none; /* Remove any default browser shadow if needed */
-}
-
-.chat-input-field:focus {
-    outline: none;
-    border-color: var(--primary-accent);
-    box-shadow: 0 0 0 3px rgba(26, 115, 232, .25); /* Slightly more pronounced focus like some modern UIs */
-}
-
-.send-btn {
-    background-color: var(--primary-accent);
-    color: white;
-    border: none;
-    border-radius: var(--border-radius-md); /* Matching input field or circular if preferred: 50% */
-    width: 48px; /* Slightly larger */
-    height: 48px; /* Slightly larger */
-    cursor: pointer;
-    font-size: 1.3rem; /* Larger icon */
+.chat-message .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.2s ease;
     flex-shrink: 0;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.chat-message.user .avatar {
+    background: var(--primary-accent-solid);
+    color: var(--text-light);
+}
+
+.chat-message.ai .avatar {
+    background: var(--ai-message-bg);
+    border: 1px solid var(--border-light);
+}
+
+.chat-message .message-content {
+    padding: 16px 20px;
+    border-radius: var(--border-radius-lg);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+}
+
+.chat-message.user .message-content {
+    background: var(--user-message-bg);
+    color: var(--text-light);
+    border-bottom-right-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-glow);
+    position: relative;
+    overflow: hidden;
+}
+
+.chat-message.user .message-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.chat-message.user:hover .message-content::before {
+    transform: translateX(100%);
+}
+
+.chat-message.ai .message-content {
+    background: var(--ai-message-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+    border-bottom-left-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-glow-warm);
+    position: relative;
+    overflow: hidden;
+}
+
+.chat-message.ai .message-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+    transform: translateX(100%);
+    transition: transform 0.6s;
+}
+
+.chat-message.ai:hover .message-content::before {
+    transform: translateX(-100%);
+}
+
+.chat-message.ai.typing .message-content {
+    background: var(--ai-message-bg);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Chat Input Area */
+.chat-input-area {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-light);
+    padding: 20px 24px;
+    box-shadow: var(--shadow-glow-light);
+    max-width: 768px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.chat-input-container {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-xl);
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.chat-input-container:focus-within {
+    border-color: var(--primary-accent-solid);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+}
+
+.chat-input-field {
+    flex: 1;
+    padding: 16px 20px;
+    padding-right: 140px; /* Make space for buttons */
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    color: var(--text-primary);
+    resize: none;
+    font-family: var(--font-family);
+    line-height: 1.5;
+    max-height: 120px;
+    min-height: 56px;
+    outline: none;
+}
+
+.chat-input-field::placeholder {
+    color: var(--text-muted);
+}
+
+.chat-input-controls {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.model-bubble-btn {
+    padding: 8px 14px;
+    border-radius: var(--border-radius-lg);
+    border: none;
+    background: var(--secondary-bg-solid);
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: var(--shadow-glow-warm);
+    height: 32px;
+    position: relative;
+    overflow: hidden;
+}
+
+.model-bubble-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.model-bubble-btn:hover::before {
+    left: 100%;
+}
+
+.model-bubble-btn i {
+    font-size: 0.875rem;
+}
+
+.model-bubble-btn.active {
+    background: var(--primary-accent-solid);
+    color: var(--text-light);
+    box-shadow: var(--shadow-glow);
+    transform: scale(1.05);
+}
+
+.model-bubble-btn:hover:not(.active) {
+    background: var(--primary-accent-hover-solid);
+    color: var(--text-light);
+    transform: translateY(-1px) scale(1.05);
+    box-shadow: var(--shadow-xl);
+}
+
+.send-btn {
+    background: var(--primary-accent-solid);
+    color: var(--text-light);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-glow);
+    position: relative;
+    overflow: hidden;
+}
+
+.send-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    transform: scale(0);
+    transition: transform 0.3s;
+}
+
+.send-btn:hover::before {
+    transform: scale(1);
 }
 
 .send-btn:hover {
-    background-color: var(--primary-accent-hover);
+    background: var(--primary-accent-hover-solid);
+    transform: translateY(-2px) scale(1.1);
+    box-shadow: var(--shadow-xl);
 }
 
 .send-btn:disabled {
-    background-color: #b0b0b0; /* Softer disabled color */
+    background: var(--text-muted);
     cursor: not-allowed;
-}
-.send-btn .spinner {
-    width: 20px; /* Adjusted for new button size */
-    height: 20px; /* Adjusted for new button size */
-    border-width: 3px;
+    transform: none;
+    box-shadow: var(--shadow-sm);
 }
 
-
-/* General Purpose Spinner */
 .spinner {
-    border: 3px solid rgba(255, 255, 255, 0.3); /* Light border for contrast on dark buttons */
-    width: 16px; /* Default size */
-    height: 16px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-top: 2px solid var(--primary-accent-solid);
     border-radius: 50%;
-    border-left-color: var(--content-bg); /* Spinner color for dark buttons */
-    animation: spin 0.8s ease infinite;
+    animation: spin 1s linear infinite;
 }
-.process-doc-btn .spinner { /* Spinner for primary button */
-    border-left-color: white;
-}
-.ai.typing .spinner { /* Spinner for AI typing indicator */
-    border: 2px solid rgba(0,0,0,0.1);
-    border-left-color: var(--text-secondary);
-    width: 12px;
-    height: 12px;
-    margin-right: 8px;
-}
-
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
-/* Font Awesome Icons specific color if needed */
-.fa-file-pdf, .fa-cogs, .fa-paper-plane, .fa-brain, .fa-plus, .fa-redo {
-    /* margin-right: 0px; /* Reset by gap in buttons etc. */
-    /* Individual icon adjustments can be made if needed */
-}
-.new-doc-btn i.fa-plus {
-    font-size: 0.9em; /* Example: if icon seems too large */
-}
-.send-btn i.fa-paper-plane {
-    /* font-size: 1.1em; /* Handled by parent font-size on send-btn */
-}
-
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    /* .sidebar related responsive styles are no longer needed */
-    /*
-    .sidebar {
-        width: 100%;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-        position: static;
-        max-height: 40vh;
-    }
-    */
-    .app-shell {
-        /* No change needed here for responsive, grid-template-columns: 1fr; is already full width */
-        /* If app-shell had rows defined for a header, they might be adjusted here, but it doesn't */
-         flex-direction: column; /* This was from when it was display:flex, not applicable to grid directly for stacking main content parts */
-                                 /* However, main-content itself is flex column, which handles its internal stacking */
-    }
-    .main-content {
-       height: auto;
-       min-height: 100vh;
-       /* width: 100% is implicitly handled by grid-template-columns: 1fr on parent */
-    }
-    .main-header-controls {
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-    }
-    .document-title-header {
-        font-size: 1rem;
-        text-align: center;
-        padding-right: 0;
-    }
-    .global-new-doc-btn {
-        width: 100%; /* Make button full width on mobile for easier tapping */
-    }
-    .chat-area {
-        padding: 15px;
-    }
-    .chat-message {
-        max-width: 85%;
-    }
-    .chat-input-area {
-        padding: 10px 15px;
-    }
-    /* .model-selection-chat responsive styles are no longer needed */
-    /*
-    .model-selection-chat {
-        margin: 0 15px 10px 15px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    */
-    .model-bubble-buttons {
-        flex-wrap: wrap; /* Allow bubble buttons to wrap on small screens */
-    }
-}
-
-/* Document Preview Modal Styles */
+/* Preview Modal */
 .preview-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background: rgba(60, 53, 48, 0.8);
+    backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000; /* Ensure it's on top */
-    opacity: 0; /* Start hidden for transition */
-    visibility: hidden; /* Start hidden for transition */
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
 }
 
-.preview-modal-overlay.active { /* This class would be toggled by JS, or simply rely on conditional rendering */
-    opacity: 1;
-    visibility: visible;
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .preview-modal-content {
-    background-color: white;
-    padding: 25px; /* Increased padding */
-    border-radius: var(--border-radius-md, 12px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25); /* Enhanced shadow */
     position: relative;
-    max-width: 80vw; /* Adjusted max-width */
-    max-height: 85vh; /* Adjusted max-height */
-    overflow: auto; /* Scroll if content (image) is too large */
-    display: flex; /* To help center image if it's smaller than container */
-    flex-direction: column; /* Stack image and potential captions/actions */
-    align-items: center; /* Center image horizontally */
+    max-width: 90vw;
+    max-height: 90vh;
+    background: var(--content-bg);
+    border-radius: var(--border-radius-xl);
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    animation: scaleIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+    from { 
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to { 
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .preview-modal-content img {
+    width: 100%;
+    height: auto;
     display: block;
-    max-width: 100%;
-    max-height: calc(85vh - 70px); /* Account for padding and close button */
-    object-fit: contain;
-    border-radius: var(--border-radius-sm, 6px); /* Optional: slight rounding for image */
+    border-radius: var(--border-radius-xl);
 }
 
 .preview-modal-close-btn {
     position: absolute;
-    top: 12px; /* Adjusted position */
-    right: 12px; /* Adjusted position */
-    background: transparent;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    background: var(--secondary-bg-solid);
+    color: var(--text-light);
     border: none;
-    font-size: 1.8rem; /* Slightly larger icon */
-    color: #555; /* Darker grey for better visibility on white */
+    border-radius: 50%;
     cursor: pointer;
-    padding: 5px;
-    line-height: 1;
-    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-glow-warm);
+    z-index: 1001;
 }
 
 .preview-modal-close-btn:hover {
-    color: #000; /* Darken on hover */
+    background: var(--primary-accent-hover-solid);
+    transform: scale(1.1);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-header-controls {
+        padding: 12px 16px;
+    }
+    
+    .chat-area {
+        padding: 16px;
+        gap: 16px;
+    }
+    
+    .chat-input-area {
+        padding: 16px;
+    }
+    
+    .chat-message {
+        max-width: 95%;
+    }
+    
+    .file-upload-view,
+    .ocr-config-view {
+        padding: 32px 16px;
+    }
+    
+    .file-upload-view h1 {
+        font-size: 1.75rem;
+    }
+    
+    .ocr-config-view h2 {
+        font-size: 1.5rem;
+    }
+    
+    .slider-container {
+        margin: 24px 0;
+        padding: 20px;
+    }
+    
+    .process-doc-btn {
+        padding: 14px 24px;
+        font-size: 0.95rem;
+    }
+    
+    .preview-modal-content {
+        max-width: 95vw;
+        max-height: 95vh;
+        margin: 16px;
+    }
+    
+    .model-bubble-btn {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+        height: 28px;
+    }
+    
+    .send-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+    }
 }
