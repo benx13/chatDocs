@@ -9,10 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "jszip": "^3.10.1",
+    "openai": "^5.1.1",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-markdown": "^10.1.0"
   },
   "devDependencies": {
+    "@types/jszip": "^3.4.0",
     "@types/node": "^22.14.0",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.6",
